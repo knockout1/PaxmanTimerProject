@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">PaxmanTimer</string>
+    <string name="action_settings">Wybierz czas chlodzenia</string>
+    <string name="start">START</string>
+    <string name="stop">ZATRZYMAJ</string>
+    <string name="pause">PAUZA</string>
+    <string name="reset">RESETUJ</string>
+    <string name="patient1">PACJENT 1</string>
+    <string name="patient2">PACJENT 2</string>
+    <string name="setTime">Wybierz czas %1s</string>
+    <string name="time">Czas</string>
+    <string name="date">Data</string>
+</resources>
