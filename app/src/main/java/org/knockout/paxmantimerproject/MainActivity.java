@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
                 currentTimeString = new SimpleDateFormat("HH:mm").format(new Date());
-                currentDateString = new SimpleDateFormat("DD.mm.yyyy").format(new Date());
+                currentDateString = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
                 dateTextView.setText(getString(R.string.time) + " " + currentTimeString);
                 timeTextView.setText(getString(R.string.date) + " " + currentDateString);
                 timeHandler.postDelayed(this, 10000);
@@ -78,11 +78,19 @@ public class MainActivity extends Activity {
                         }
                     }.start();
                     startTimer();
-             /*   } else if (paxmanTimer != null && !paxmanTimer.isPaused()) {
-                    pauseTimer();*/
+                } else if (paxmanTimer != null && !paxmanTimer.isPaused()) {
+                    pauseTimer();
                 } else if (paxmanTimer != null && paxmanTimer.isPaused()) {
                     resumeTimer();
                 }
+            }
+        });
+
+        timerButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                resetTimer();
+                return true;
             }
         });
 
@@ -113,9 +121,16 @@ public class MainActivity extends Activity {
         startAnimation(progressBar);
     }
 
+    private void resetTimer() {
+        stopAnimation(progressBar);
+        //progressBar.setVisibility(View.INVISIBLE);
+        paxmanTimer.cancel();
+        timerButton.setText(convertMilisecToTime(timerStartValue));
+    }
+
     public void cancelTimer() {
         stopAnimation(progressBar);
-        progressBar.setVisibility(View.INVISIBLE);
+        //progressBar.setVisibility(View.INVISIBLE);
         if (paxmanTimer != null) {
             paxmanTimer.cancel();
         }
@@ -130,7 +145,6 @@ public class MainActivity extends Activity {
 
     private void pauseTimer() {
         paxmanTimer.pause();
-        timerButton.setText(R.string.start);
         stopAnimation(progressBar);
     }
 
