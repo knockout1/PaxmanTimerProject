@@ -16,6 +16,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -116,9 +122,14 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void startTimer() {
+    private void startTimer(){
         progressBar.setVisibility(View.VISIBLE);
         startAnimation(progressBar);
+        try {
+            dateTextView.setText(new GetMethodSupport().execute("http://localhost:8080/PaxmanWebService_war_exploded/helloworld").get());
+        }catch (Exception e){
+
+        }
     }
 
     private void resetTimer() {
